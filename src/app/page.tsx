@@ -21,6 +21,7 @@ export default function SimoCPQDashboard() {
   const [validation, setValidation] = useState<ValidationSummary | undefined>(undefined);
   const [ragCitations, setRagCitations] = useState<TechnicalDocumentCitation[]>([]);
   const [alternatives, setAlternatives] = useState<any[]>([]);
+  const [originalBOMIds, setOriginalBOMIds] = useState<string[]>([]);
   const [currentRequirements, setCurrentRequirements] = useState<CustomerRequirements>({
     powerKW: 15,
     voltageV: 400,
@@ -76,6 +77,9 @@ export default function SimoCPQDashboard() {
       setRagCitations(data.ragCitations);
       setAlternatives(data.alternatives);
       setCurrentRequirements(data.parsedRequirements);
+      if (data.validation?.selectedBOM) {
+        setOriginalBOMIds(data.validation.selectedBOM.map(p => p.id));
+      }
     } catch (err: unknown) {
       console.error('Agent execution error:', err);
     } finally {
@@ -93,6 +97,19 @@ export default function SimoCPQDashboard() {
   const handleApplyAlternative = (componentIds: string[]) => {
     revalidateBOM(componentIds);
   };
+
+  const handleRestoreOriginalBOM = () => {
+    if (originalBOMIds.length > 0) {
+      revalidateBOM(originalBOMIds);
+    }
+  };
+
+  const isCustomOrAlternative = Boolean(
+    validation &&
+    originalBOMIds.length > 0 &&
+    (validation.selectedBOM.length !== originalBOMIds.length ||
+      !validation.selectedBOM.every((p) => originalBOMIds.includes(p.id)))
+  );
 
   const handleCustomerTierChange = (newTier: 'Standard (0%)' | 'OEM Partner (12%)' | 'Strategic Enterprise (20%)') => {
     setCustomerTier(newTier);
@@ -188,6 +205,8 @@ export default function SimoCPQDashboard() {
             ragCitations={ragCitations}
             alternatives={alternatives}
             onApplyAlternative={handleApplyAlternative}
+            onRestoreOriginal={handleRestoreOriginalBOM}
+            isCustomOrAlternative={isCustomOrAlternative}
             onRemoveComponent={handleRemoveComponent}
             isLoading={isLoading}
           />

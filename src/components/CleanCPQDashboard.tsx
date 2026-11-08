@@ -13,7 +13,9 @@ import {
   ArrowRight,
   ChevronDown,
   ChevronUp,
-  Download
+  Download,
+  RotateCcw,
+  Check
 } from 'lucide-react';
 import { ValidationSummary, PriceBreakdown } from '@/lib/engine/constraints';
 import { IndustrialProduct } from '@/lib/catalog/products';
@@ -27,6 +29,8 @@ interface CleanCPQDashboardProps {
   ragCitations: TechnicalDocumentCitation[];
   alternatives: any[];
   onApplyAlternative: (componentIds: string[]) => void;
+  onRestoreOriginal?: () => void;
+  isCustomOrAlternative?: boolean;
   onRemoveComponent: (id: string) => void;
   isLoading: boolean;
 }
@@ -37,6 +41,8 @@ export const CleanCPQDashboard: React.FC<CleanCPQDashboardProps> = ({
   ragCitations,
   alternatives,
   onApplyAlternative,
+  onRestoreOriginal,
+  isCustomOrAlternative,
   onRemoveComponent,
   isLoading
 }) => {
@@ -304,33 +310,69 @@ export const CleanCPQDashboard: React.FC<CleanCPQDashboardProps> = ({
       {/* 4. ALTERNATIVE PACKAGES */}
       {alternatives.length > 0 && (
         <div className="bg-[#091322] border border-cyan-950 rounded-2xl p-5 shadow-lg">
-          <h3 className="text-sm font-bold text-white mb-1">Recommended Alternative Packages</h3>
-          <p className="text-xs text-slate-400 mb-3">
-            Compare options for different budgets or environmental conditions.
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+            <div>
+              <h3 className="text-sm font-bold text-white mb-1">Recommended Alternative Packages</h3>
+              <p className="text-xs text-slate-400">
+                Compare options for different budgets or environmental conditions.
+              </p>
+            </div>
+            {isCustomOrAlternative && onRestoreOriginal && (
+              <button
+                onClick={onRestoreOriginal}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-950/80 border border-cyan-500/60 text-[#00ffb9] hover:bg-[#00ffb9] hover:text-black text-xs font-semibold transition cursor-pointer self-start sm:self-auto shrink-0 shadow-sm"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Reset to Recommended Package</span>
+              </button>
+            )}
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {alternatives.map(alt => (
-              <div key={alt.id} className="p-3.5 rounded-xl bg-[#060c16] border border-slate-800 flex flex-col justify-between text-xs">
-                <div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/40 font-bold mb-1.5 inline-block">
-                    {alt.tag}
-                  </span>
-                  <h4 className="font-bold text-white mb-1">{alt.name}</h4>
-                  <p className="text-slate-400 text-[11px] mb-3">{alt.highlightDifference}</p>
+            {alternatives.map(alt => {
+              const currentIds = selectedBOM.map(p => p.id);
+              const isActive = Array.isArray(alt.componentIds) &&
+                alt.componentIds.length === currentIds.length &&
+                alt.componentIds.every((id: string) => currentIds.includes(id));
+
+              return (
+                <div 
+                  key={alt.id} 
+                  className={`p-3.5 rounded-xl bg-[#060c16] border flex flex-col justify-between text-xs transition ${
+                    isActive ? 'border-cyan-500/80 shadow-md shadow-cyan-950/50' : 'border-slate-800'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/40 font-bold inline-block">
+                        {alt.tag}
+                      </span>
+                      {isActive && (
+                        <span className="text-[10px] font-mono font-bold text-[#00ffb9] bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-600/50 flex items-center gap-1">
+                          <Check className="w-3 h-3" /> Active
+                        </span>
+                      )}
+                    </div>
+                    <h4 className="font-bold text-white mb-1">{alt.name}</h4>
+                    <p className="text-slate-400 text-[11px] mb-3">{alt.highlightDifference}</p>
+                  </div>
+                  <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
+                    <span className="font-mono text-xs font-bold text-white">€{alt.totalPriceEUR.toLocaleString()}</span>
+                    {isActive ? (
+                      <span className="text-[11px] font-medium text-cyan-400">Applied</span>
+                    ) : (
+                      <button
+                        onClick={() => onApplyAlternative(alt.componentIds)}
+                        className="flex items-center gap-1 text-[11px] font-bold text-[#00ffb9] hover:underline cursor-pointer"
+                      >
+                        <span>Apply</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-white">€{alt.totalPriceEUR.toLocaleString()}</span>
-                  <button
-                    onClick={() => onApplyAlternative(alt.componentIds)}
-                    className="flex items-center gap-1 text-[11px] font-bold text-[#00ffb9] hover:underline cursor-pointer"
-                  >
-                    <span>Apply</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
