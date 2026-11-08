@@ -126,7 +126,7 @@ export const WorkflowNodeGraph: React.FC<WorkflowNodeGraphProps> = ({
       id: 'node-solver',
       label: '5. Constraint Solver',
       category: 'solver',
-      techBadge: 'Symbolic AI / Google OR-Tools',
+      techBadge: 'Symbolic AI / Rules Engine',
       icon: ShieldCheck,
       status: validation ? 'completed' : isLoading ? 'running' : 'idle',
       executionTime: '10.3 ms',

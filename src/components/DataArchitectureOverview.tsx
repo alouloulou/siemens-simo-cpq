@@ -97,7 +97,7 @@ export const DataArchitectureOverview: React.FC = () => {
             </div>
             <h4 className="text-sm font-bold text-white mb-1">Constraint Rules Engine</h4>
             <p className="text-xs text-slate-400">
-              Deterministic physics equations (heat de-rating, cable reflection, pricing math, OR-Tools logic).
+              Deterministic physics equations (heat de-rating, cable reflection, pricing math, symbolic logic).
             </p>
           </div>
           <div className="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-emerald-300">
@@ -259,7 +259,7 @@ export const DataArchitectureOverview: React.FC = () => {
                   Constraint Rules & Formulas (`src/lib/engine/constraints.ts`)
                 </h4>
                 <p className="text-slate-400 text-[11px]">
-                  The mathematical laws executed by the solver. Implemented in TypeScript and Python OR-Tools.
+                  The mathematical laws executed by the solver. Implemented in TypeScript Symbolic Rules Engine.
                 </p>
               </div>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">

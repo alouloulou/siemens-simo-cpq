@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
       { Parameter: 'VAT (20%) (€)', Value: pricing.vatEUR },
       { Parameter: 'Gross Total (€)', Value: pricing.grossTotalEUR },
       { Parameter: 'Configuration Date', Value: new Date().toLocaleDateString() },
-      { Parameter: 'Pricing Engine', Value: 'Siemens Deterministic OR-Tools Rules (0% Hallucination)' },
+      { Parameter: 'Pricing Engine', Value: 'Siemens Deterministic Rules Engine (0% Hallucination)' },
     ];
 
     const wb = XLSX.utils.book_new();
@@ -78,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Architecture Badge */}
           <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#0b172a] border border-cyan-800/40 text-xs text-cyan-200">
             <Cpu className="w-3.5 h-3.5 text-[#00ffb9]" />
-            <span>Gemini 3.5 Flash + Deterministic OR-Tools</span>
+            <span>Neuro-Symbolic Engine (GenAI + Rules Engine)</span>
           </div>
 
           {/* Customer Tier Selector */}
