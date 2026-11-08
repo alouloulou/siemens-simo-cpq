@@ -15,7 +15,7 @@ export const RAGSourcesPanel: React.FC<RAGSourcesPanelProps> = ({ citations }) =
         <div className="flex items-center gap-2">
           <BookOpen className="w-4 h-4 text-[#00ffb9]" />
           <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200">
-            RAG Grounding & Technical Documentation Citations
+            Siemens Engineering Knowledge Base & Guidelines (SIOS)
           </h3>
         </div>
         <span className="text-[11px] font-mono text-cyan-300 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/40">
@@ -25,7 +25,7 @@ export const RAGSourcesPanel: React.FC<RAGSourcesPanelProps> = ({ citations }) =
 
       {citations.length === 0 ? (
         <div className="p-6 text-center text-slate-500 text-xs">
-          RAG citations will be displayed when the autonomous agent searches technical documentation.
+          Engineering guidelines will be displayed when searching technical documentation.
         </div>
       ) : (
         <div className="space-y-3">

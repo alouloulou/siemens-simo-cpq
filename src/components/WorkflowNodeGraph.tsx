@@ -104,13 +104,13 @@ export const WorkflowNodeGraph: React.FC<WorkflowNodeGraphProps> = ({
     },
     {
       id: 'node-rag',
-      label: '4. Engineering Norms (RAG)',
+      label: '4. Engineering Knowledge Base',
       category: 'rag',
-      techBadge: 'Siemens Knowledge Base',
+      techBadge: 'Knowledge Engineering / SIOS',
       icon: BookOpen,
       status: ragCitations.length > 0 ? 'completed' : isLoading ? 'running' : 'idle',
       executionTime: '< 8 ms',
-      summary: `${ragCitations.length} official manuals retrieved (D 81.1, GH1, IEC norms)`,
+      summary: `${ragCitations.length} official Siemens manuals retrieved (D 81.1, GH1, IEC norms)`,
       inputData: {
         queryTerms: `${parsedRequirements?.cooling} ${parsedRequirements?.cableLengthMeters}m cable ${parsedRequirements?.ambientTempC}°C ambient`,
       },
@@ -120,7 +120,7 @@ export const WorkflowNodeGraph: React.FC<WorkflowNodeGraphProps> = ({
         page: c.page,
         directive: c.siemensGuidelineSummary,
       })),
-      description: 'Retrieval-Augmented Generation layer grounding configuration rules in authentic Siemens manuals, IEC 60034 norms, and ATEX directives.',
+      description: 'Knowledge Engineering repository grounding configuration rules in authentic Siemens manuals, IEC 60034 norms, and SIOS technical directives.',
     },
     {
       id: 'node-solver',

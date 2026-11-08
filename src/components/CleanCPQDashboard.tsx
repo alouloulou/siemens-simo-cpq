@@ -344,7 +344,7 @@ export const CleanCPQDashboard: React.FC<CleanCPQDashboardProps> = ({
           <div className="flex items-center gap-2.5">
             <Cpu className="w-4 h-4 text-[#00ffb9]" />
             <span className="text-xs font-bold text-slate-200">
-              Technical Behind-the-Scenes (Agent Tool Calls & RAG Document Citations)
+              Technical Behind-the-Scenes (Agent Tool Calls & Engineering Manual Citations)
             </span>
           </div>
           <div className="flex items-center gap-2 text-xs text-slate-400">
@@ -355,10 +355,10 @@ export const CleanCPQDashboard: React.FC<CleanCPQDashboardProps> = ({
 
         {showTechnicalDetails && (
           <div className="p-5 border-t border-slate-800 space-y-4 bg-[#040810]">
-            {/* RAG Citations */}
+            {/* Knowledge Base Citations */}
             <div>
               <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-2">
-                Siemens Engineering Manuals Grounding (RAG):
+                Siemens Engineering Knowledge Base & Guidelines (SIOS):
               </h4>
               <div className="space-y-2">
                 {ragCitations.map(cite => (
