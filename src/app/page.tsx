@@ -5,13 +5,14 @@ import { Header } from '@/components/Header';
 import { EngineerInput, PRESET_SCENARIOS } from '@/components/EngineerInput';
 import { CleanCPQDashboard } from '@/components/CleanCPQDashboard';
 import { WorkflowNodeGraph } from '@/components/WorkflowNodeGraph';
+import { DataArchitectureOverview } from '@/components/DataArchitectureOverview';
 import { AgentActivityStep, AgentExecutionResult } from '@/lib/agent/controller';
 import { ValidationSummary, CustomerRequirements } from '@/lib/engine/constraints';
 import { TechnicalDocumentCitation } from '@/lib/rag/knowledge';
-import { Layers, GitFork, Sparkles } from 'lucide-react';
+import { Layers, GitFork, Database, Sparkles } from 'lucide-react';
 
 export default function SimoCPQDashboard() {
-  const [activeTab, setActiveTab] = useState<'solution' | 'workflow'>('solution');
+  const [activeTab, setActiveTab] = useState<'solution' | 'workflow' | 'data'>('solution');
   const [prompt, setPrompt] = useState(PRESET_SCENARIOS[0].prompt);
   const [customerTier, setCustomerTier] = useState<'Standard (0%)' | 'OEM Partner (12%)' | 'Strategic Enterprise (20%)'>('OEM Partner (12%)');
   const [isLoading, setIsLoading] = useState(false);
@@ -167,6 +168,21 @@ export default function SimoCPQDashboard() {
                 Interactive
               </span>
             </button>
+
+            <button
+              onClick={() => setActiveTab('data')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition cursor-pointer ${
+                activeTab === 'data'
+                  ? 'bg-gradient-to-r from-[#00646e] to-[#00ffb9] text-black shadow-lg shadow-[#00ffb9]/20'
+                  : 'bg-[#091322] text-slate-400 hover:text-white border border-slate-800'
+              }`}
+            >
+              <Database className="w-4 h-4" />
+              <span>Data Architecture & Knowledge Foundations</span>
+              <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/40">
+                3 Pillars
+              </span>
+            </button>
           </div>
 
           <span className="hidden sm:inline-block text-[11px] font-mono text-slate-400">
@@ -197,6 +213,11 @@ export default function SimoCPQDashboard() {
             prompt={prompt}
             isLoading={isLoading}
           />
+        )}
+
+        {/* Tab 3: Data Architecture Overview */}
+        {activeTab === 'data' && (
+          <DataArchitectureOverview />
         )}
       </main>
 
