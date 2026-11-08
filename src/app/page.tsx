@@ -162,7 +162,7 @@ export default function SimoCPQDashboard() {
               }`}
             >
               <GitFork className="w-4 h-4" />
-              <span>AI Workflow Node Graph (n8n Style)</span>
+              <span>Solution Architecture & Execution Graph</span>
               <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/40">
                 Interactive
               </span>
@@ -187,7 +187,7 @@ export default function SimoCPQDashboard() {
           />
         )}
 
-        {/* Tab 2: n8n-Style Workflow Node Graph */}
+        {/* Tab 2: Architecture Workflow Node Graph */}
         {activeTab === 'workflow' && (
           <WorkflowNodeGraph
             activitySteps={activitySteps}

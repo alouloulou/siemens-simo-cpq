@@ -193,7 +193,7 @@ export const WorkflowNodeGraph: React.FC<WorkflowNodeGraphProps> = ({
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#00ffb9] animate-pulse" />
             <h3 className="text-sm font-bold text-white uppercase tracking-wider">
-              n8n-Style AI Workflow & Constraint Architecture Graph
+              Solution Architecture & Execution Pipeline Graph
             </h3>
           </div>
           <p className="text-xs text-slate-400 mt-0.5">
