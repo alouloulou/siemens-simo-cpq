@@ -130,12 +130,28 @@ export const CleanCPQDashboard: React.FC<CleanCPQDashboardProps> = ({
               <Euro className="w-5 h-5 text-[#00ffb9]" />
             </div>
             <div>
-              <span className="text-[11px] text-slate-400 font-medium uppercase tracking-wider block">Net Package Price</span>
-              <h4 className="text-lg font-mono font-extrabold text-white">
-                €{pricing.netTotalEUR.toLocaleString()}
-              </h4>
-              <span className="text-[10px] text-slate-400">
-                Incl. {pricing.discountPercentage}% Account Discount
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] text-slate-400 font-medium uppercase tracking-wider block">Net Package Price</span>
+                {pricing.discountPercentage > 0 && (
+                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-950 text-emerald-400 border border-emerald-800/40 font-bold">
+                    -{pricing.discountPercentage}%
+                  </span>
+                )}
+              </div>
+              <div className="flex items-baseline gap-2">
+                <h4 className="text-xl font-mono font-extrabold text-[#00ffb9]">
+                  €{pricing.netTotalEUR.toLocaleString()}
+                </h4>
+                {pricing.discountPercentage > 0 && (
+                  <span className="text-xs text-slate-500 line-through font-mono">
+                    €{pricing.subtotalEUR.toLocaleString()}
+                  </span>
+                )}
+              </div>
+              <span className="text-[10px] text-slate-400 font-mono block">
+                {pricing.discountPercentage > 0
+                  ? `List €${pricing.subtotalEUR.toLocaleString()} − €${pricing.discountAmountEUR.toLocaleString()} (${pricing.discountPercentage}%)`
+                  : 'Full Catalog List Price'}
               </span>
             </div>
           </div>
