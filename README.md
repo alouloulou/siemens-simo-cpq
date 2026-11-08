@@ -3,7 +3,7 @@
 > **Enterprise AI Architect & Solution Engineer Proof of Concept**  
 > Built for Siemens Digital Industries & Drive Technology (Motion Control).
 
-An autonomous AI CPQ (Configure, Price, Quote) and decision-support system for **Siemens SIMOTICS electric motors** and **SINAMICS frequency inverters**. Combines **Generative AI tool-calling (Gemini 2.5 Flash)** with **Symbolic Constraint Satisfaction (Google OR-Tools / Deterministic Engine)** and **RAG Technical Documentation Grounding** to eliminate AI hallucinations on physical engineering constraints and pricing.
+An autonomous AI CPQ (Configure, Price, Quote) and decision-support system for **Siemens SIMOTICS electric motors** and **SINAMICS frequency inverters**. Combines **Generative AI tool-calling (Gemini 3.5 Flash Lite)** with a **Deterministic Symbolic Rules Engine (+ Python OR-Tools prototype)** and **Engineering Knowledge Base (SIOS & IEC Standards)** to eliminate AI hallucinations on physical engineering constraints and pricing.
 
 ---
 
@@ -36,9 +36,9 @@ An autonomous AI CPQ (Configure, Price, Quote) and decision-support system for *
 | Layer | Technology |
 | :--- | :--- |
 | **Frontend & UI** | Next.js 16 (App Router), React 19, Tailwind CSS v4, Lucide Icons |
-| **AI Agent Loop** | Google Gemini 2.5 Flash via `@google/genai` SDK with tool calling |
-| **Constraint Solver** | Symbolic rule engine + Google OR-Tools CP-SAT (`python_engine/solver.py`) |
-| **RAG Grounding** | Siemens D 81.1, Drive Tech Doc GH1, ATEX Directive 2014/34/EU, IEC 60034-25 |
+| **AI Agent Loop** | Google Gemini 3.5 Flash Lite via `@google/genai` SDK with structured extraction |
+| **Constraint Solver** | TypeScript Deterministic Rules Engine + Standalone Python OR-Tools solver (`python_engine/solver.py`) |
+| **Knowledge Base** | Siemens SIOS Manuals (D 81.1, GH1, A5E3329), ATEX Directive 2014/34/EU, IEC 60034-25 |
 | **Export Engine** | SheetJS (`xlsx`) for industrial spec sheet generation |
 | **Hosting** | Vercel (1-Click zero-config serverless deployment) |
 
