@@ -139,55 +139,45 @@ export default function SimoCPQDashboard() {
           onClear={handleClear}
         />
 
-        {/* View Mode Switcher Tabs */}
-        <div className="flex items-center justify-between border-b border-slate-800/80 pb-2">
-          <div className="flex items-center gap-2">
+        {/* View Mode Switcher Tabs (Clean Segmented Control) */}
+        <div className="border-b border-slate-800/80 pb-3">
+          <div className="inline-flex p-1 rounded-xl bg-[#060c16] border border-slate-800/80 gap-1 shadow-inner">
             <button
               onClick={() => setActiveTab('solution')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
                 activeTab === 'solution'
-                  ? 'bg-gradient-to-r from-[#00646e] to-[#00ffb9] text-black shadow-lg shadow-[#00ffb9]/20'
-                  : 'bg-[#091322] text-slate-400 hover:text-white border border-slate-800'
+                  ? 'bg-gradient-to-r from-[#00646e] to-[#00ffb9] text-black shadow-md'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
-              <Layers className="w-4 h-4" />
-              <span>Drive Package & Engineering Solution</span>
+              <Layers className="w-3.5 h-3.5" />
+              <span>Hardware Solution</span>
             </button>
 
             <button
               onClick={() => setActiveTab('workflow')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
                 activeTab === 'workflow'
-                  ? 'bg-gradient-to-r from-[#00646e] to-[#00ffb9] text-black shadow-lg shadow-[#00ffb9]/20'
-                  : 'bg-[#091322] text-slate-400 hover:text-white border border-slate-800'
+                  ? 'bg-gradient-to-r from-[#00646e] to-[#00ffb9] text-black shadow-md'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
-              <GitFork className="w-4 h-4" />
-              <span>Solution Architecture & Execution Graph</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/40">
-                Interactive
-              </span>
+              <GitFork className="w-3.5 h-3.5" />
+              <span>Workflow Graph</span>
             </button>
 
             <button
               onClick={() => setActiveTab('data')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
                 activeTab === 'data'
-                  ? 'bg-gradient-to-r from-[#00646e] to-[#00ffb9] text-black shadow-lg shadow-[#00ffb9]/20'
-                  : 'bg-[#091322] text-slate-400 hover:text-white border border-slate-800'
+                  ? 'bg-gradient-to-r from-[#00646e] to-[#00ffb9] text-black shadow-md'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
-              <Database className="w-4 h-4" />
-              <span>Data Architecture & Knowledge Foundations</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/40">
-                3 Pillars
-              </span>
+              <Database className="w-3.5 h-3.5" />
+              <span>Data Architecture</span>
             </button>
           </div>
-
-          <span className="hidden sm:inline-block text-[11px] font-mono text-slate-400">
-            {activeTab === 'solution' ? 'Executive Hardware View' : 'Architecture & Data Inspector View'}
-          </span>
         </div>
 
         {/* Tab 1: Clean Executive Dashboard */}
